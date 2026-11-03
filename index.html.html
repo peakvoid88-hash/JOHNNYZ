@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#641c2d" />
+  <meta name="description" content="JOHNNYZ. — EAT. PLAY. CONNECT. A casual food and dessert hangout in Dehiwala." />
+  <title>JOHNNYZ. — EAT. PLAY. CONNECT.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --maroon: #641c2d;
+      --maroon-dark: #42111e;
+      --latte: #fff8e7;
+      --latte-deep: #f2e8d4;
+      --ink: #29191b;
+      --muted: #806f69;
+      --line: rgba(41,25,27,.15);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Inter", Arial, sans-serif;
+      --display: "Anton", Impact, sans-serif;
+      --max: 1240px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; background: var(--latte); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img { display: block; max-width: 100%; }
+    .announcement { background: var(--maroon-dark); color: var(--latte); text-align: center; padding: 9px 16px; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .nav-wrap { position: sticky; top: 0; z-index: 50; background: rgba(255,248,231,.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav { max-width: var(--max); height: 76px; margin: auto; padding: 0 34px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-family: var(--display); font-size: 31px; letter-spacing: .015em; color: var(--maroon); line-height: 1; }
+    .brand span { color: var(--ink); }
+    .nav-links { display: flex; gap: 34px; align-items: center; }
+    .nav-links a { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; transition: color .2s; }
+    .nav-links a:hover { color: var(--maroon); }
+    .nav-cta, .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--maroon); color: var(--latte); border: 1px solid var(--maroon); padding: 14px 21px; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; transition: .25s ease; }
+    .nav-cta:hover, .button:hover { background: var(--maroon-dark); border-color: var(--maroon-dark); transform: translateY(-2px); }
+    .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 22px; cursor: pointer; }
+    .hero { min-height: 680px; display: grid; grid-template-columns: 1fr 1fr; background: var(--maroon); color: var(--latte); overflow: hidden; }
+    .hero-copy { padding: 105px max(40px, calc((100vw - var(--max))/2)) 90px max(34px, calc((100vw - var(--max))/2)); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; position: relative; z-index: 1; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .2em; font-weight: 800; text-transform: uppercase; }
+    .eyebrow:before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: .7; }
+    h1, h2, h3, p { margin-top: 0; }
+    .hero h1 { font-family: var(--display); font-size: clamp(76px, 10vw, 148px); font-weight: 400; line-height: .88; letter-spacing: -.025em; text-transform: uppercase; margin: 28px 0 25px; max-width: 680px; }
+    .hero h1 em { color: #e6c6a2; font-style: normal; }
+    .hero-desc { color: rgba(255,248,231,.8); font-size: 14px; line-height: 1.9; max-width: 390px; margin-bottom: 32px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button.light { background: var(--latte); border-color: var(--latte); color: var(--maroon); }
+    .button.light:hover { background: #fff; border-color: #fff; }
+    .text-link { display: inline-flex; align-items: center; gap: 10px; padding: 14px 2px; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .text-link span { font-size: 17px; transition: transform .2s; }
+    .text-link:hover span { transform: translateX(5px); }
+    .hero-visual { min-height: 680px; position: relative; background: #32131b; }
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; opacity: .82; }
+    .hero-visual:after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(100,28,45,.38), transparent 35%), linear-gradient(0deg, rgba(35,12,18,.35), transparent 50%); }
+    .hero-stamp { position: absolute; z-index: 2; right: 34px; bottom: 34px; width: 116px; height: 116px; border: 1px solid rgba(255,248,231,.7); border-radius: 50%; display: grid; place-items: center; text-align: center; color: var(--latte); font-size: 9px; line-height: 1.7; letter-spacing: .13em; text-transform: uppercase; transform: rotate(9deg); }
+    .hero-stamp strong { display: block; font-family: var(--display); font-size: 29px; font-weight: 400; letter-spacing: 0; line-height: 1; }
+    .ticker { overflow: hidden; background: var(--latte-deep); border-bottom: 1px solid var(--line); padding: 15px 0; }
+    .ticker-track { display: flex; width: max-content; animation: ticker 38s linear infinite; transform: translate3d(0,0,0); will-change: transform; backface-visibility: hidden; }
+    .ticker-group { display: flex; flex: 0 0 auto; align-items: center; }
+    .ticker-item { display: inline-flex; align-items: center; gap: 25px; padding: 0 25px; color: var(--maroon); font-family: var(--display); font-size: 18px; letter-spacing: .055em; text-transform: uppercase; white-space: nowrap; }
+    .ticker-item b { color: #a77a55; font-family: var(--sans); font-size: 12px; font-weight: 500; }
+    @keyframes ticker { to { transform: translate3d(-50%,0,0); } }
+    .section { padding: 112px 34px; }
+    .container { max-width: var(--max); margin: auto; }
+    .section-top { display: flex; justify-content: space-between; align-items: end; gap: 25px; margin-bottom: 48px; }
+    .section-label { color: var(--maroon); font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 15px; }
+    .section h2 { font-family: var(--display); font-size: clamp(49px, 6.5vw, 88px); line-height: .94; font-weight: 400; letter-spacing: -.015em; text-transform: uppercase; margin: 0; }
+    .section h2 em { color: var(--maroon); font-style: normal; }
+    .section-intro { max-width: 340px; color: var(--muted); font-size: 13px; line-height: 1.9; margin: 0 0 4px; }
+    .feature-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 22px; }
+    .feature-card { position: relative; min-height: 480px; overflow: hidden; background: #e3d4bf; }
+    .feature-card img { width: 100%; height: 100%; min-height: 480px; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+    .feature-card:hover img { transform: scale(1.045); }
+    .feature-card:after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(25,10,12,.75)); }
+    .feature-content { position: absolute; z-index: 1; bottom: 30px; left: 32px; right: 32px; color: white; }
+    .feature-content small { font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    .feature-content h3 { font-family: var(--display); font-size: clamp(35px, 4vw, 57px); line-height: .95; font-weight: 400; text-transform: uppercase; margin: 12px 0 9px; }
+    .feature-content p { color: rgba(255,255,255,.82); font-size: 12px; line-height: 1.7; max-width: 370px; margin: 0; }
+    .feature-side { display: grid; grid-template-rows: 1fr 1fr; gap: 22px; }
+    .feature-side .feature-card, .feature-side .feature-card img { min-height: 229px; }
+    .menu-section { background: var(--maroon); color: var(--latte); }
+    .menu-section .section-label { color: #e6c6a2; }
+    .menu-section h2 em { color: #e6c6a2; }
+    .menu-section .section-intro { color: rgba(255,248,231,.7); }
+    .menu-note { border-top: 1px solid rgba(255,248,231,.25); border-bottom: 1px solid rgba(255,248,231,.25); padding: 28px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .menu-note strong { font-family: var(--display); font-size: clamp(27px, 4vw, 45px); font-weight: 400; text-transform: uppercase; }
+    .menu-note p { max-width: 390px; color: rgba(255,248,231,.72); font-size: 12px; line-height: 1.8; margin: 0; }
+    .menu-placeholder { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-top: 32px; background: rgba(255,248,231,.2); border: 1px solid rgba(255,248,231,.2); }
+    .menu-placeholder div { padding: 24px; background: var(--maroon); }
+    .menu-placeholder span { display: block; color: #e6c6a2; font-size: 9px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 12px; }
+    .menu-placeholder strong { font-family: var(--display); font-size: 25px; font-weight: 400; text-transform: uppercase; }
+    .menu-placeholder p { color: rgba(255,248,231,.65); font-size: 11px; line-height: 1.7; margin: 9px 0 0; }
+    .menu-catalog { margin-top: 38px; }
+    .menu-category { margin-top: 54px; }
+    .menu-category:first-child { margin-top: 0; }
+    .menu-category-head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,248,231,.34); margin-bottom: 8px; }
+    .menu-category-head h3 { margin: 0; font-family: var(--display); font-size: clamp(34px, 4vw, 48px); font-weight: 400; line-height: 1; text-transform: uppercase; }
+    .menu-category-head span { color: #e6c6a2; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-align: right; }
+    .menu-subcategory { margin-top: 28px; }
+    .menu-subcategory h4 { color: #e6c6a2; font-size: 10px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; margin: 0 0 8px; }
+    .menu-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: baseline; padding: 15px 0; border-bottom: 1px solid rgba(255,248,231,.14); }
+    .menu-item-name { color: var(--latte); font-size: 13px; font-weight: 700; letter-spacing: -.01em; }
+    .menu-item-desc { display: block; color: rgba(255,248,231,.58); font-size: 11px; line-height: 1.6; margin-top: 5px; }
+    .menu-item-price { color: #e6c6a2; font-size: 13px; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .menu-price-pending { color: rgba(255,248,231,.5); font-size: 10px; font-weight: 600; letter-spacing: .04em; }
+    .menu-footnote { color: rgba(255,248,231,.55); font-size: 10px; line-height: 1.7; margin: 24px 0 0; }
+
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 90px; align-items: center; }
+    .about-image { position: relative; padding: 0 28px 28px 0; }
+    .about-image:after { content: ""; position: absolute; right: 0; bottom: 0; width: 70%; height: 70%; background: var(--latte-deep); z-index: -1; }
+    .about-image img { width: 100%; height: 500px; object-fit: cover; }
+    .about-copy p { color: var(--muted); font-size: 13px; line-height: 2; max-width: 510px; margin: 25px 0 28px; }
+    .rating-band { background: var(--latte-deep); padding: 58px 34px; }
+    .rating-inner { max-width: var(--max); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .rating-big { display: flex; align-items: center; gap: 20px; }
+    .rating-number { font-family: var(--display); font-size: 76px; color: var(--maroon); line-height: .9; }
+    .stars { color: #b57a31; letter-spacing: .13em; font-size: 15px; }
+    .rating-copy { color: var(--muted); font-size: 11px; line-height: 1.7; margin-top: 7px; }
+    .rating-message { font-family: var(--serif); font-size: clamp(22px, 3vw, 35px); font-style: italic; max-width: 460px; line-height: 1.3; }
+    .visit { background: var(--ink); color: var(--latte); }
+    .visit .section-label { color: #e6c6a2; }
+    .visit h2 em { color: #e6c6a2; }
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+    .visit-details { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 25px; margin-top: 40px; }
+    .detail small { color: #d3ad8b; display: block; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 10px; }
+    .detail p, .detail a { color: rgba(255,248,231,.86); font-size: 13px; line-height: 1.8; margin: 0; }
+    .visit-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button.outline { background: transparent; border-color: rgba(255,248,231,.45); color: var(--latte); }
+    .button.outline:hover { background: var(--latte); color: var(--ink); }
+    .map-card { min-height: 390px; position: relative; overflow: hidden; background: #49383a; }
+    .map-card iframe { width: 100%; height: 100%; min-height: 390px; border: 0; filter: grayscale(.65) sepia(.18); }
+    .map-caption { position: absolute; bottom: 16px; left: 16px; right: 16px; padding: 15px 17px; background: var(--latte); color: var(--ink); display: flex; align-items: center; justify-content: space-between; gap: 15px; font-size: 11px; font-weight: 700; }
+    footer { background: var(--maroon-dark); color: var(--latte); padding: 30px 34px; }
+    .footer-inner { max-width: var(--max); margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand { font-family: var(--display); font-size: 26px; }
+    .footer-small { color: rgba(255,248,231,.6); font-size: 10px; line-height: 1.7; }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-copy { padding: 90px 34px 70px; }
+      .hero-visual { min-height: 440px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-side { grid-template-columns: 1fr 1fr; grid-template-rows: 260px; }
+      .feature-side .feature-card, .feature-side .feature-card img { min-height: 260px; }
+      .about-grid { gap: 45px; }
+      .visit-grid { gap: 35px; }
+    }
+    @media (max-width: 650px) {
+      .announcement { font-size: 9px; }
+      .nav { height: 66px; padding: 0 20px; }
+      .brand { font-size: 28px; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 66px; left: 0; right: 0; padding: 20px; background: var(--latte); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 15px 4px; border-bottom: 1px solid var(--line); }
+      .nav-links .nav-cta { margin-top: 14px; text-align: center; border: 0; }
+      .ticker { padding: 13px 0; }
+      .ticker-item { gap: 19px; padding: 0 19px; font-size: 16px; }
+      .hero-copy { padding: 77px 22px 58px; }
+      .hero h1 { font-size: clamp(72px, 20vw, 112px); }
+      .hero-desc { font-size: 13px; }
+      .hero-visual { min-height: 350px; }
+      .hero-stamp { width: 92px; height: 92px; right: 20px; bottom: 20px; font-size: 7px; }
+      .hero-stamp strong { font-size: 24px; }
+      .section { padding: 78px 22px; }
+      .section-top { display: block; margin-bottom: 32px; }
+      .section-intro { margin-top: 20px; }
+      .feature-card, .feature-card img { min-height: 390px; }
+      .feature-side { grid-template-columns: 1fr; grid-template-rows: 240px 240px; }
+      .feature-side .feature-card, .feature-side .feature-card img { min-height: 240px; }
+      .feature-content { left: 22px; right: 22px; bottom: 22px; }
+      .menu-note { align-items: flex-start; flex-direction: column; }
+      .menu-placeholder { grid-template-columns: 1fr; }
+      .menu-placeholder div { padding: 21px; }
+      .menu-category { margin-top: 42px; }
+      .menu-category-head { align-items: flex-start; }
+      .menu-category-head h3 { font-size: 39px; }
+      .menu-category-head span { max-width: 112px; line-height: 1.6; }
+      .menu-item { gap: 12px; padding: 14px 0; }
+      .menu-item-name { font-size: 12px; }
+      .menu-item-price { font-size: 12px; }
+      .menu-item-desc { font-size: 10px; }
+      .about-grid, .visit-grid { grid-template-columns: 1fr; }
+      .about-grid { gap: 42px; }
+      .about-image img { height: 390px; }
+      .about-copy p { margin: 20px 0 24px; }
+      .rating-band { padding: 42px 22px; }
+      .rating-inner { align-items: flex-start; flex-direction: column; }
+      .rating-number { font-size: 66px; }
+      .visit-details { grid-template-columns: 1fr 1fr; gap: 26px 15px; }
+      .map-card, .map-card iframe { min-height: 320px; }
+      footer { padding: 27px 22px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .footer-links { flex-wrap: wrap; gap: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *:before, *:after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    [hidden] { display: none !important; }
+    /* Accessibility: comfortable text, clear focus and large touch targets */
+    :focus-visible { outline: 3px solid #d3ad8b; outline-offset: 4px; }
+    .nav-links a, .button, .nav-cta, .text-link, .menu-toggle { min-height: 44px; }
+    .nav-links a { display: inline-flex; align-items: center; }
+    .announcement { font-size: 12px; letter-spacing: .12em; }
+    .hero-desc, .section-intro, .about-copy p, .detail p, .detail a { font-size: 15px; }
+    .feature-content p, .menu-placeholder p { font-size: 13px; }
+    .section-label, .eyebrow { font-size: 12px; }
+    .button, .nav-cta { font-size: 12px; min-height: 50px; padding: 15px 22px; }
+    .text-link { font-size: 12px; }
+    @media (max-width: 650px) {
+      .nav-links a { min-height: 48px; font-size: 13px; }
+      .hero-actions { align-items: stretch; }
+      .hero-actions .button, .hero-actions .text-link { min-height: 50px; }
+    }
+
+    .menu-page-hero { background: var(--maroon); color: var(--latte); padding: 66px 34px 52px; }
+    .menu-page-hero .container { max-width: var(--max); margin: auto; }
+    .menu-page-hero h1 { font-family: var(--display); font-size: clamp(56px, 9vw, 112px); font-weight: 400; line-height: .9; margin: 18px 0; }
+    .menu-page-hero h1 em { color: #e6c6a2; font-style: normal; }
+    .menu-page-hero p { max-width: 620px; color: rgba(255,248,231,.82); font-size: 16px; line-height: 1.8; margin-bottom: 0; }
+    .menu-jump-wrap { position: sticky; top: 76px; z-index: 20; background: var(--latte); border-bottom: 1px solid var(--line); box-shadow: 0 8px 24px rgba(41,25,27,.06); }
+    .menu-jump { max-width: var(--max); margin: auto; padding: 14px 34px; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .menu-jump a { min-height: 56px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 12px 16px; border: 2px solid var(--maroon); color: var(--maroon); font-size: 14px; font-weight: 800; border-radius: 6px; transition: background .2s,color .2s; }
+    .menu-jump a:hover, .menu-jump a:focus-visible { background: var(--maroon); color: var(--latte); }
+    .menu-main { padding: 54px 34px 100px; }
+    .menu-main .container { max-width: 980px; margin: auto; }
+    .menu-category { scroll-margin-top: 170px; margin: 0 0 56px; padding: 34px 38px; background: var(--maroon); color: var(--latte); border-radius: 8px; }
+    .menu-category-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,248,231,.34); margin-bottom: 12px; }
+    .menu-category-head h2 { margin: 0; font-family: var(--display); font-size: clamp(38px, 5vw, 58px); font-weight: 400; line-height: 1; text-transform: uppercase; }
+    .menu-category-head span { color: #e6c6a2; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-align: right; }
+    .menu-subcategory { margin-top: 26px; }
+    .menu-subcategory h3 { color: #e6c6a2; font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 8px; }
+    .menu-item { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 18px; align-items: start; padding: 17px 0; border-bottom: 1px solid rgba(255,248,231,.17); }
+    .menu-item-name { color: var(--latte); font-size: 16px; font-weight: 800; }
+    .menu-item-desc { display: block; color: rgba(255,248,231,.75); font-size: 14px; line-height: 1.6; margin-top: 5px; }
+    .menu-item-price { color: #f0d4b5; font-size: 16px; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .menu-price-pending { color: rgba(255,248,231,.75); font-size: 12px; font-weight: 600; text-align: right; max-width: 120px; }
+    .menu-footnote { color: var(--muted); font-size: 13px; line-height: 1.8; margin: 0; }
+    .menu-back { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 800; padding: 12px 0; }
+    @media (max-width: 650px) {
+      .menu-page-hero { padding: 48px 22px 38px; }
+      .menu-page-hero p { font-size: 15px; }
+      .menu-jump-wrap { top: 66px; }
+      .menu-jump { padding: 10px 14px; gap: 7px; }
+      .menu-jump a { min-height: 54px; padding: 10px 5px; font-size: 12px; }
+      .menu-main { padding: 30px 14px 70px; }
+      .menu-category { padding: 25px 20px; margin-bottom: 28px; }
+      .menu-category-head { align-items: flex-start; flex-direction: column; }
+      .menu-category-head span { text-align: left; }
+      .menu-item { gap: 10px; padding: 15px 0; }
+      .menu-item-name, .menu-item-price { font-size: 14px; }
+      .menu-item-desc { font-size: 13px; }
+    }
+
+
+
+    /* Responsive finish: tablet navigation, stable media sizing and mobile ergonomics */
+    body { overflow-x: hidden; }
+    .hero-visual { min-width: 0; }
+    .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .feature-card { min-width: 0; }
+    .feature-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .menu-item > div { min-width: 0; }
+    .menu-item-name { overflow-wrap: anywhere; }
+    .menu-price-pending { overflow-wrap: anywhere; }
+    .map-card { min-width: 0; }
+    .map-card iframe { display: block; width: 100%; }
+    .menu-jump a, .menu-back, .footer-links a { -webkit-tap-highlight-color: transparent; }
+
+    @media (max-width: 900px) {
+      .nav { height: 68px; padding: 0 24px; }
+      .menu-toggle { display: inline-grid; place-items: center; flex: 0 0 46px; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 16px;
+        right: 16px;
+        padding: 10px 18px 16px;
+        background: var(--latte);
+        border: 1px solid var(--line);
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 16px 34px rgba(41,25,27,.14);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { min-height: 50px; padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: 12px; }
+      .nav-links .nav-cta { margin-top: 12px; justify-content: center; border: 0; }
+      .menu-jump-wrap { top: 68px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-copy { padding: 78px 28px 62px; }
+      .hero-visual { min-height: clamp(320px, 57vw, 470px); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-card { height: 430px; min-height: 0; }
+      .feature-card img { min-height: 0; }
+      .feature-side { grid-template-columns: repeat(2, minmax(0,1fr)); grid-template-rows: 250px; }
+      .feature-side .feature-card { height: 250px; min-height: 0; }
+      .feature-side .feature-card img { min-height: 0; }
+      .about-grid { grid-template-columns: 1fr 1fr; gap: 42px; }
+      .visit-grid { grid-template-columns: 1fr 1fr; gap: 34px; }
+      .section { padding-left: 28px; padding-right: 28px; }
+      .menu-main { padding-left: 22px; padding-right: 22px; }
+      .menu-category { padding-left: 28px; padding-right: 28px; }
+    }
+
+    @media (max-width: 650px) {
+      html { scroll-padding-top: 76px; }
+      .announcement { padding: 8px 12px; font-size: 10px; letter-spacing: .11em; }
+      .nav { height: 64px; padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); }
+      .brand { font-size: 29px; }
+      .menu-toggle { width: 46px; height: 46px; min-height: 46px; font-size: 21px; border-radius: 4px; }
+      .nav-links { top: 64px; left: 10px; right: 10px; padding: 10px 16px 14px; }
+      .nav-links a { min-height: 50px; font-size: 13px; }
+      .nav-links .nav-cta { min-height: 50px; }
+      .hero { min-height: auto; }
+      .hero-copy { padding: 66px 20px 48px; }
+      .eyebrow { font-size: 10px; letter-spacing: .14em; }
+      .hero h1 { max-width: 100%; font-size: clamp(58px, 17.5vw, 104px); line-height: .9; margin: 24px 0 20px; letter-spacing: -.03em; }
+      .hero-desc { max-width: 34rem; font-size: 14px; line-height: 1.75; margin-bottom: 24px; }
+      .hero-actions { width: 100%; display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+      .hero-actions .button, .hero-actions .text-link { width: 100%; min-height: 52px; justify-content: center; }
+      .hero-actions .text-link { padding: 14px; border: 1px solid rgba(255,248,231,.32); }
+      .hero-visual { height: clamp(260px, 78vw, 390px); min-height: 0; }
+      .hero-stamp { width: 88px; height: 88px; right: 16px; bottom: 16px; font-size: 7px; }
+      .hero-stamp strong { font-size: 23px; }
+      .ticker { padding: 11px 0; }
+      .ticker-track { animation-duration: 52s; }
+      .ticker-item { gap: 15px; padding: 0 16px; font-size: 15px; }
+      .section { padding: 66px 20px; }
+      .section-top { display: block; margin-bottom: 28px; }
+      .section h2 { font-size: clamp(40px, 11.8vw, 66px); line-height: .96; overflow-wrap: anywhere; }
+      .section-intro { margin-top: 16px; font-size: 14px; line-height: 1.75; }
+      .feature-grid { gap: 14px; }
+      .feature-card { height: clamp(270px, 86vw, 390px); }
+      .feature-content { left: 18px; right: 18px; bottom: 18px; }
+      .feature-content h3 { font-size: clamp(30px, 9vw, 42px); }
+      .feature-content p { font-size: 13px; }
+      .feature-side { grid-template-columns: 1fr; grid-template-rows: 230px 230px; gap: 14px; }
+      .feature-side .feature-card { height: 230px; }
+      .menu-note { padding: 22px 0; gap: 12px; }
+      .menu-note strong { font-size: clamp(28px, 8.4vw, 38px); line-height: .98; }
+      .menu-note p { font-size: 14px; line-height: 1.7; }
+      .menu-placeholder { grid-template-columns: 1fr; margin-top: 20px; }
+      .menu-placeholder div { padding: 18px 20px; }
+      .menu-placeholder span { font-size: 10px; }
+      .menu-placeholder strong { font-size: 27px; }
+      .menu-placeholder p { font-size: 13px; }
+      .about-grid, .visit-grid { grid-template-columns: 1fr; gap: 34px; }
+      .about-image { padding: 0 16px 16px 0; }
+      .about-image img { height: clamp(260px, 78vw, 360px); }
+      .about-copy p { font-size: 14px; line-height: 1.8; margin: 18px 0 22px; }
+      .rating-band { padding: 38px 20px; }
+      .rating-inner { gap: 20px; }
+      .rating-number { font-size: 62px; }
+      .rating-message { font-size: clamp(22px, 6.5vw, 30px); }
+      .visit-details { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px 16px; margin-top: 30px; }
+      .detail small { font-size: 10px; letter-spacing: .12em; }
+      .detail p, .detail a { font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+      .visit-actions { display: grid; grid-template-columns: 1fr; gap: 10px; }
+      .visit-actions .button { width: 100%; min-height: 52px; }
+      .map-card, .map-card iframe { min-height: 290px; }
+      .map-caption { left: 10px; right: 10px; bottom: 10px; padding: 12px; font-size: 10px; }
+      footer { padding: 26px 20px calc(26px + env(safe-area-inset-bottom)); }
+      .footer-inner { gap: 14px; }
+      .footer-small { font-size: 11px; }
+      .footer-links { gap: 18px; }
+      .footer-links a { min-height: 44px; display: inline-flex; align-items: center; font-size: 11px; }
+
+      .menu-page-hero { padding: 42px 20px 34px; }
+      .menu-page-hero h1 { font-size: clamp(55px, 17vw, 86px); line-height: .92; }
+      .menu-page-hero p { font-size: 14px; line-height: 1.7; }
+      .menu-jump-wrap { top: 64px; }
+      .menu-jump { padding: 9px 10px; gap: 7px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .menu-jump a { min-width: 0; min-height: 50px; padding: 8px 3px; font-size: 11px; letter-spacing: 0; border-width: 1.5px; border-radius: 5px; }
+      .menu-main { padding: 24px 12px 56px; }
+      .menu-category { padding: 22px 17px; margin-bottom: 22px; border-radius: 7px; scroll-margin-top: 132px; }
+      .menu-category-head { flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 15px; }
+      .menu-category-head h2 { font-size: clamp(36px, 11vw, 48px); }
+      .menu-category-head span { max-width: none; text-align: left; font-size: 10px; letter-spacing: .12em; }
+      .menu-subcategory { margin-top: 22px; }
+      .menu-subcategory h3 { font-size: 11px; line-height: 1.4; letter-spacing: .08em; }
+      .menu-item { grid-template-columns: minmax(0,1fr) auto; gap: 10px; align-items: center; padding: 14px 0; }
+      .menu-item-name { font-size: 14px; line-height: 1.4; }
+      .menu-item-desc { font-size: 12px; line-height: 1.5; }
+      .menu-item-price { font-size: 13px; }
+      .menu-price-pending { font-size: 10px; max-width: 86px; line-height: 1.4; }
+      .menu-footnote { font-size: 12px; line-height: 1.7; padding: 0 4px; }
+      .menu-back { min-height: 48px; font-size: 14px; }
+    }
+
+    @media (max-width: 380px) {
+      .visit-details { grid-template-columns: 1fr; gap: 20px; }
+      .menu-category { padding-left: 14px; padding-right: 14px; }
+      .menu-item { gap: 7px; }
+      .menu-item-name { font-size: 13px; }
+      .menu-item-price { font-size: 12px; }
+      .menu-jump { gap: 5px; padding-left: 8px; padding-right: 8px; }
+      .menu-jump a { font-size: 10px; }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .nav-cta:hover, .button:hover { transform: none; }
+      .feature-card:hover img { transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track { animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="announcement">EAT. PLAY. CONNECT. · DEHIWALA</div>
+  <div class="nav-wrap">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#home" data-view="home" aria-label="JOHNNYZ home">JOHNNYZ<span>.</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#good-stuff">The good stuff</a>
+        <a href="#menu-page" data-view="menu">Menu</a>
+        <a href="#story">Our place</a>
+        <a href="#reviews">Reviews</a>
+        <a class="nav-cta" href="#visit">Find us ↗</a>
+      </div>
+    </nav>
+  </div>
+
+<div id="homeView">
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow">A little spot on Galle Road</div>
+        <h1>EAT.<br><em>PLAY.</em><br>CONNECT.</h1>
+        <p class="hero-desc">Come hungry, bring your people, and make a moment of it. Good food and good times are waiting at JOHNNYZ. in Dehiwala.</p>
+        <div class="hero-actions">
+          <a class="button light" href="#menu-page" data-view="menu">Explore the menu <span>↗</span></a>
+          <a class="text-link" href="#visit">Plan your visit <span>→</span></a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1500&q=85" srcset="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=640&q=80 640w, https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=960&q=82 960w, https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1500&q=85 1500w" sizes="(max-width: 850px) 100vw, 50vw" alt="Warm, welcoming casual restaurant interior" width="1500" height="1000" decoding="async" fetchpriority="high" />
+        <div class="hero-stamp">A good time<br><strong>4.9★</strong>on Google</div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="JOHNNYZ highlights">
+      <div class="ticker-track">
+        <div class="ticker-group">
+          <span class="ticker-item">Fresh bites <b>✳</b></span>
+          <span class="ticker-item">Sweet moments <b>✳</b></span>
+          <span class="ticker-item">Good company <b>✳</b></span>
+          <span class="ticker-item">Easy hangouts <b>✳</b></span>
+          <span class="ticker-item">Made for sharing <b>✳</b></span>
+        </div>
+        <div class="ticker-group" aria-hidden="true">
+          <span class="ticker-item">Fresh bites <b>✳</b></span>
+          <span class="ticker-item">Sweet moments <b>✳</b></span>
+          <span class="ticker-item">Good company <b>✳</b></span>
+          <span class="ticker-item">Easy hangouts <b>✳</b></span>
+          <span class="ticker-item">Made for sharing <b>✳</b></span>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="good-stuff">
+      <div class="container">
+        <div class="section-top reveal">
+          <div>
+            <div class="section-label">01 / The good stuff</div>
+            <h2>A PLACE FOR<br><em>GOOD</em> CRAVINGS.</h2>
+          </div>
+          <p class="section-intro">From fresh buns to something sweet, JOHNNYZ. is the kind of casual spot made for good food and even better company.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=82" srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=520&q=78 520w, https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=82 1200w" sizes="(max-width: 850px) calc(100vw - 40px), 55vw" alt="Freshly baked pastries and buns" loading="lazy" decoding="async" width="1200" height="900">
+            <div class="feature-content">
+              <small>Freshly made favourites</small>
+              <h3>Fresh out.<br>Full of flavour.</h3>
+              <p>Fresh buns and satisfying bites — a little something to make your day.</p>
+            </div>
+          </article>
+          <div class="feature-side">
+            <article class="feature-card reveal">
+              <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=82" srcset="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=420&q=78 420w, https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=650&q=80 650w, https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=82 900w" sizes="(max-width: 650px) calc(100vw - 40px), (max-width: 850px) 50vw, 42vw" alt="Dessert served in a glass" loading="lazy" decoding="async" width="900" height="650">
+              <div class="feature-content">
+                <small>For the sweet tooth</small>
+                <h3>Save room<br>for sweet.</h3>
+              </div>
+            </article>
+            <article class="feature-card reveal">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=82" srcset="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=420&q=78 420w, https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=650&q=80 650w, https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=82 900w" sizes="(max-width: 650px) calc(100vw - 40px), (max-width: 850px) 50vw, 42vw" alt="Casual restaurant dining space" loading="lazy" decoding="async" width="900" height="650">
+              <div class="feature-content">
+                <small>Bring your people</small>
+                <h3>Stay a little<br>longer.</h3>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="menu">
+      <div class="container">
+        <div class="section-top reveal">
+          <div>
+            <div class="section-label">02 / Find your favourite</div>
+            <h2>YOUR CRAVINGS.<br><em>YOUR CALL.</em></h2>
+          </div>
+          <p class="section-intro">Buns and bites, sweet treats, and drinks to go with it. Our menu has its own page, so finding what you want is simple.</p>
+        </div>
+        <div class="menu-note reveal">
+          <strong>Pick a mood. Find a favourite.</strong>
+          <p>Choose Mains, Desserts or Beverages on the menu page to jump straight to what you're craving — no endless scrolling.</p>
+        </div>
+        <div class="menu-placeholder reveal">
+          <div><span>01 / Hungry?</span><strong>Mains</strong><p>Filling buns and bites.</p></div>
+          <div><span>02 / Sweet tooth?</span><strong>Desserts</strong><p>Cakes and sweet treats.</p></div>
+          <div><span>03 / Thirsty?</span><strong>Beverages</strong><p>Milkshakes, coffee and tea.</p></div>
+        </div>
+        <div style="margin-top:30px" class="reveal">
+          <a class="button light" href="#menu-page" data-view="menu">Open the full menu <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="story">
+      <div class="container about-grid">
+        <div class="about-image reveal">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1100&q=82" srcset="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=520&q=78 520w, https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1100&q=82 1100w" sizes="(max-width: 850px) calc(100vw - 40px), 42vw" alt="Cosy cafe setting" loading="lazy" decoding="async" width="1100" height="900">
+        </div>
+        <div class="about-copy reveal">
+          <div class="section-label">03 / Our place</div>
+          <h2>COME AS<br>YOU <em>ARE.</em></h2>
+          <p>JOHNNYZ. is a relaxed café-style hangout on Galle Road, Dehiwala. Whether you're catching up with friends, grabbing a takeaway or stopping by for dessert, there's room for a simple good moment.</p>
+          <p>Good food, friendly service and an easy-going atmosphere — just the way a neighbourhood spot should feel.</p>
+          <a class="button" href="#visit">Plan your visit ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="rating-band" id="reviews">
+      <div class="rating-inner reveal">
+        <div class="rating-big">
+          <div class="rating-number">4.9</div>
+          <div><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><div class="rating-copy">Google rating<br>Based on 13 reviews</div></div>
+        </div>
+        <div class="rating-message">“Great food, fresh and delicious buns, and excellent service!”</div>
+      </div>
+    </section>
+
+    <section class="section visit" id="visit">
+      <div class="container visit-grid">
+        <div class="reveal">
+          <div class="section-label">04 / Come say hello</div>
+          <h2>YOUR TABLE<br>IS <em>WAITING.</em></h2>
+          <div class="visit-details">
+            <div class="detail"><small>Find us</small><p>273 Galle Road,<br>Dehiwala-Mount Lavinia,<br>Sri Lanka</p></div>
+            <div class="detail"><small>Call us</small><a href="tel:+94764623406">+94 76 462 3406</a></div>
+            <div class="detail"><small>Opening hours</small><p>Opens at 6:00 PM<br><span style="color:rgba(255,248,231,.55)">Closing time to be confirmed</span></p></div>
+            <div class="detail"><small>Come on in</small><p>Dine-in<br>Takeaway</p></div>
+          </div>
+          <div class="visit-actions">
+            <a class="button light" href="https://www.google.com/maps/search/?api=1&query=JOHNNYZ%2C+273+Galle+Rd%2C+Dehiwala-Mount+Lavinia" target="_blank" rel="noopener">Get directions ↗</a>
+            <a class="button outline" href="tel:+94764623406">Call JOHNNYZ.</a>
+          </div>
+        </div>
+        <div class="map-card reveal">
+          <iframe title="Map showing JOHNNYZ on Galle Road, Dehiwala-Mount Lavinia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=273%20Galle%20Rd%2C%20Dehiwala-Mount%20Lavinia%2C%20Sri%20Lanka&output=embed"></iframe>
+          <div class="map-caption"><span>JOHNNYZ. · Dehiwala</span><span>Open in Maps ↗</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div><div class="footer-brand">JOHNNYZ.</div><div class="footer-small">EAT. PLAY. CONNECT.</div></div>
+      <div class="footer-small">273 Galle Road, Dehiwala-Mount Lavinia, Sri Lanka</div>
+      <div class="footer-links"><a href="#home">Back to top ↑</a><a href="tel:+94764623406">Call us</a></div>
+    </div>
+  </footer>
+</div>
+
+
+<div id="menuView" hidden>
+    <header class="menu-page-hero">
+      <div class="container">
+        <div class="eyebrow">Something for everyone</div>
+        <h1>THE <em>MENU.</em></h1>
+        <p>Choose a category below to jump straight to what you're looking for. Easy to find, easy to read, and no need to scroll through everything.</p>
+      </div>
+    </header>
+    <nav class="menu-jump-wrap" aria-label="Jump to menu category">
+      <div class="menu-jump">
+        <a href="#mains">Mains</a>
+        <a href="#desserts">Desserts</a>
+        <a href="#beverages">Beverages</a>
+      </div>
+    </nav>
+    <main>
+    <section class="menu-main">
+      <div class="container">
+        <section class="menu-category" id="mains" aria-labelledby="mains-title">
+          <div class="menu-category-head"><h2 id="mains-title">Mains</h2><span>01 / Buns &amp; bites</span></div>
+          <div class="menu-subcategory">
+            <h3>Chicken · All 6-inch buns</h3>
+            <div class="menu-item"><div><span class="menu-item-name">Stress Buster</span><span class="menu-item-desc">Devilled chicken</span></div><span class="menu-item-price">Rs. 420</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Silent Killer</span><span class="menu-item-desc">BBQ flavoured chicken</span></div><span class="menu-item-price">Rs. 580</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Big Shot</span><span class="menu-item-desc">Chicken kebab</span></div><span class="menu-item-price">Rs. 550</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Delulu</span><span class="menu-item-desc">Pepper chicken</span></div><span class="menu-item-price">Rs. 450</span></div>
+          </div>
+          <div class="menu-subcategory">
+            <h3>Beef · All 6-inch buns</h3>
+            <div class="menu-item"><div><span class="menu-item-name">Classified</span><span class="menu-item-desc">Devilled beef</span></div><span class="menu-item-price">Rs. 590</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Menace</span><span class="menu-item-desc">BBQ flavoured beef</span></div><span class="menu-item-price">Rs. 590</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Rizzler</span><span class="menu-item-desc">Beef kebab</span></div><span class="menu-item-price">Rs. 640</span></div>
+          </div>
+          <div class="menu-subcategory">
+            <h3>Vegetarian</h3>
+            <div class="menu-item"><div><span class="menu-item-name">Wildcard</span><span class="menu-item-desc">Devilled mushroom · 6-inch bun</span></div><span class="menu-item-price">Rs. 360</span></div>
+          </div>
+        </section>
+
+        <section class="menu-category" id="desserts" aria-labelledby="desserts-title">
+          <div class="menu-category-head"><h2 id="desserts-title">Desserts</h2><span>02 / A little something sweet</span></div>
+          <div class="menu-subcategory">
+            <h3>Sheet cakes</h3>
+            <div class="menu-item"><div><span class="menu-item-name">Italian Tiramisu</span></div><span class="menu-item-price">Rs. 700</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Banoffee Cake</span></div><span class="menu-item-price">Rs. 750</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Strawberry Cheesecake</span></div><span class="menu-item-price">Rs. 750</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Double Cream Tres Leches</span></div><span class="menu-item-price">Rs. 700</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Caramel Jamun Cake</span></div><span class="menu-item-price">Rs. 700</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Choco Melt Cake</span></div><span class="menu-item-price">Rs. 700</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Oreo Delight</span></div><span class="menu-item-price">Rs. 700</span></div>
+          </div>
+          <div class="menu-subcategory">
+            <h3>Viral cakes</h3>
+            <div class="menu-item"><div><span class="menu-item-name">Basque Burnt Cheesecake</span></div><span class="menu-item-price">Rs. 1,460</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Cold Blueberry Cheesecake</span></div><span class="menu-item-price">Rs. 1,375</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Molten Lava Cookie Bomb</span></div><span class="menu-price-pending">Price not provided</span></div>
+          </div>
+        </section>
+
+        <section class="menu-category" id="beverages" aria-labelledby="beverages-title">
+          <div class="menu-category-head"><h2 id="beverages-title">Beverages</h2><span>03 / Sip something good</span></div>
+          <div class="menu-subcategory">
+            <h3>Milkshakes</h3>
+            <div class="menu-item"><div><span class="menu-item-name">Ice Milo</span></div><span class="menu-item-price">Rs. 450</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Chocolate Milk Shake</span></div><span class="menu-item-price">Rs. 450</span></div>
+            <div class="menu-item"><div><span class="menu-item-name">Vanilla Milk Shake</span></div><span class="menu-item-price">Rs. 430</span></div>
+          </div>
+          <div class="menu-subcategory">
+            <h3>Grab and go</h3>
+            <div class="menu-item"><div><span class="menu-item-name">Johnnyz Special Iced Coffee</span></div><span class="menu-item-price">Rs. 250</span></div>
+          </div>
+          <div class="menu-subcategory">
+            <h3>Hot</h3>
+            <div class="menu-item"><div><span class="menu-item-name">Johnnyz Special Milk Tea</span></div><span class="menu-item-price">Rs. 160</span></div>
+          </div>
+        </section>
+        <p class="menu-footnote">Prices are based on the menu details provided and may change. Please contact JOHNNYZ. to confirm current prices and availability. The Molten Lava Cookie Bomb price has not yet been provided.</p>
+        <p><a class="menu-back" href="#home" data-view="home">← Back to JOHNNYZ. home</a></p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div><div class="footer-brand">JOHNNYZ.</div><div class="footer-small">EAT. PLAY. CONNECT.</div></div>
+      <div class="footer-small">273 Galle Road, Dehiwala-Mount Lavinia, Sri Lanka</div>
+      <div class="footer-links"><a href="#home" data-view="home">Home</a><a href="tel:+94764623406">Call us</a></div>
+    </div>
+  </footer>
+</div>
+  <script>
+
+    const homeView = document.getElementById('homeView');
+    const menuView = document.getElementById('menuView');
+
+    function showView(view, target) {
+      const showMenu = view === 'menu';
+      homeView.hidden = showMenu;
+      menuView.hidden = !showMenu;
+      document.title = showMenu ? 'Menu — JOHNNYZ. | EAT. PLAY. CONNECT.' : 'JOHNNYZ. — EAT. PLAY. CONNECT.';
+      if (showMenu) {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      } else if (target) {
+        requestAnimationFrame(() => {
+          const el = document.querySelector(target);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    document.querySelectorAll('[data-view="menu"]').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        showView('menu');
+        history.replaceState(null, '', '#menu-page');
+      });
+    });
+    document.querySelectorAll('[data-view="home"]').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        showView('home');
+        history.replaceState(null, '', '#home');
+      });
+    });
+    menuView.querySelectorAll('.menu-jump a').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        const target = link.getAttribute('href');
+        const el = document.querySelector(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    document.querySelectorAll('#navLinks a[href^="#"]:not([data-view])').forEach(link => {
+      link.addEventListener('click', event => {
+        if (!homeView.hidden) return;
+        event.preventDefault();
+        const target = link.getAttribute('href');
+        showView('home', target);
+        history.replaceState(null, '', target);
+      });
+    });
+    if (location.hash === '#menu-page') showView('menu');
+
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      toggle.textContent = open ? '×' : '☰';
+    });
+    links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation');
+      toggle.textContent = '☰';
+    }));
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px 40px 0px' });
+      revealItems.forEach(el => observer.observe(el));
+    } else {
+      revealItems.forEach(el => el.classList.add('visible'));
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && links.classList.contains('open')) {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation');
+        toggle.textContent = '☰';
+        toggle.focus();
+      }
+    });
+  </script>
+</body>
+</html>
